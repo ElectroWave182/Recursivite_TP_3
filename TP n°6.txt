@@ -1,0 +1,167 @@
+Exercice 1 :
+____________
+
+
+1)
+def contenu(l):
+    
+    if l != []:
+        
+        print(l[0])
+        contenu(l[1:])
+        
+contenu([])
+print()
+contenu([4, 2, 6])
+print()
+contenu(['a', True, "xy", 7])
+
+2)
+def contenu(l):
+    
+    if l != []:
+        
+        print(l[-1])
+        contenu(l[:-1])
+        
+contenu([])
+print()
+contenu([4, 2, 6])
+print()
+contenu(['a', True, "xy", 7])
+
+
+Exercice 2 :
+____________
+
+
+1)
+def triee(l):
+    
+    if len(l) <= 1:
+        return True
+    
+    elif l[1] >= l[0]:
+        return triee(l[1:])
+    
+    else:
+        return False
+
+t = [-2, 4, 4, 6]
+
+assert t == sorted(t), "Erreur, cas de base"
+
+t = []
+assert t == sorted(t), "Erreur, cas limite"
+
+t = [5, -7, 8]
+assert t != sorted(t), "Erreur, cas d'erreur"
+
+2)
+def palindrome(mot):
+    
+    if len(mot) < 2:
+        return True
+    
+    else:
+        return mot[0] == mot[-1] and palindrome(mot[1 : -1])
+
+assert palindrome("radar"), "Erreur, cas de base 1"
+assert palindrome("rotator"), "Erreur, cas de base 2"
+assert palindrome("detartrated"), "Erreur, cas de base 3"
+assert palindrome(""), "Erreur, cas limite 1"
+assert palindrome("a"), "Erreur, cas limite 2"
+assert not(palindrome("kayk")), "Erreur, cas d'erreur"
+
+
+Exercice 3 :
+____________
+
+
+def parties(n):
+    
+    if n == 0:
+        return [[], [0]]
+        
+    else:
+        final = []
+        prec = parties(n - 1)
+        for part in prec:
+            part.append(n)
+            final.append(part)
+            
+        return parties(n - 1) + final
+
+assert parties(2) == [[], [0], [1], [0, 1], [2], [0, 2], [1, 2], [0, 1, 2]], "Erreur, cas de base"
+assert parties(0) == [[], [0]], "Erreur, cas limite"
+assert parties(1) != [[], [0], [1], [0, 1], [1, 0]], "Erreur, cas d'erreur"
+
+
+Exercice 4 :
+____________
+
+
+def horner(l, x):
+
+    if len(l) == 1:
+        return l[0]
+
+    else:
+        return horner(l[: -1], x) * x + l[-1]
+
+assert horner([2, -3, 4, -6], 10) == 1734, "Erreur, cas de base"
+assert horner([0], 42) == 0, "Erreur, cas limite"
+assert horner([3, 5], -9) != 0, "Erreur, cas d'erreur"
+
+
+Exercice 5 :
+____________
+
+
+Procédure)
+def procZero(l):
+    
+    l = []
+    
+    
+    """
+    if l != []:   
+    
+        if l[-1] == 0:
+            l = l[: -1]
+            procZero(l[:])
+            
+        else:
+            procZero(l[: -1])
+            """
+            
+l = [0, 1, 0, 2]
+procZero(l)
+print(l)
+
+Fonction)
+def foncZero(l):
+    
+    if l == []:
+        return []
+    
+    elif l[-1] == 0:
+        return foncZero(l[: -1])
+        
+    else:
+        return foncZero(l[: -1]) + l[-1 :]
+            
+l = [0, 1, 0, 2]
+assert foncZero(l) == [1, 2], "Erreur, cas de base 1"
+
+l = [0, 0, 0]
+assert foncZero(l) == [], "Erreur, cas de base 2"
+
+l = [1, 2, 3]
+assert foncZero(l) == [1, 2, 3], "Erreur, cas de base 3"
+
+l = []
+assert foncZero(l) == [], "Erreur, cas limite"
+
+l = [0, -4, 5]
+assert foncZero(l) != [0, 5], "Erreur, cas d'erreur"
